@@ -54,6 +54,12 @@
                         @endif
                     </header>
 
+
+                    <p align='center'>
+                        ApiREST Sistema de Atenci&oacute;n M&eacute;dica Off Line
+                    </p>
+
+                    <!--
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
@@ -161,10 +167,10 @@
                             </div>
                         </div>
                     </main>
-
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+                    -->                                
+                    <!-- <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </footer>
+                    </footer> -->
                 </div>
             </div>
         </div>
