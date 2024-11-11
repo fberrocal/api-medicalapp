@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CIT;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class CITController extends Controller
 {
@@ -49,9 +50,18 @@ class CITController extends Controller
             'citas.*.IDMEDICO'      => 'required|string'
         ];
 
-        $citas       = $request->input('json');
-        $citasObj    = json_decode($citas);
-        $citas_array = json_decode($citas, true);
+        if (is_string($request->input('json'))) {
+
+            $citas = $request->input('json');
+            $citasObj = json_decode($citas);
+            $citas_array = json_decode($citas, true);
+
+        } elseif (is_array($request->input('json'))) {
+
+            $citasObj    = $request->input('json');
+            $citas_array = $request->input('json');
+
+        }
 
         $validator = Validator::make($citas_array, $validation_rules);
 
@@ -66,17 +76,17 @@ class CITController extends Controller
             if (!empty($citas_array) && !empty($citasObj)) {
                 try {
                     /*
-                    foreach ($citas_array['citas'] as $record) {
-                        $record = array_map('trim', $record);
-                        CIT::create($record); // INSERCION UNO A UNO
-                    }
+                        foreach ($citas_array['citas'] as $record) {
+                            $record = array_map('trim', $record);
+                            CIT::create($record); // INSERCION UNO A UNO
+                        }
                     */
-
+                    
                     CIT::insert($citas_array['citas']); // INSERCION MASIVA
             
                     $data = array(
                         'status' => 'success',
-                        'code' => 201,
+                        'code' => 200,
                         'message' => 'Registros insertados correctamente'
                     );
         
@@ -100,6 +110,5 @@ class CITController extends Controller
         }    
 
         return response()->json($data, $data['code']);
-
     }
 }

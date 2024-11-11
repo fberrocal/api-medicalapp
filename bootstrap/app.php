@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
-			'/api/cit/insert'
+			'/api/cit/insert',
+            '/api/aut/enviar',
+            '/api/hca/enviar'
 		]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
