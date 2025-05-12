@@ -64,3 +64,65 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Project repository information
+
+``` Git
+	create a new repository on the command line
+
+	echo "# api-medicalapp" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git branch -M main
+	git remote add origin https://github.com/fberrocal/api-medicalapp.git
+	git push -u origin main
+
+	or push an existing repository from the command line
+
+	git remote add origin https://github.com/fberrocal/api-medicalapp.git
+	git branch -M main
+	git push -u origin main
+```
+
+# COMANDOS DOCKER PARA LEVANTAR EL CONTENEDOR
+
+```
+	-- OK
+
+	-- Creación de la imagen a partir del archivo .dockerfile
+
+	> docker build . -t imagen-offlineserver
+
+	-- Levantar el contenedor con el servidor
+
+	> docker run -d -p 8086:80 imagen-offlineserver
+
+```
+
+## LLAMADO AL CUALQUIERA DE LAS RUTAS DEFINIDAS
+
+	http://localhost:8086/app/public/api/cit/doctor/1063165584
+
+
+## OBSERVACIONES
+
+Para acceder a Base de Datos desde el contenedor Docker se deben hacer los siguientes cambios
+
+	- Cambios entre el ambiente del contenedor y el ambiente local
+
+		1. Archivo .env
+
+			Agregar la contante: DB_OPTIONS="Encrypt=yes;TrustServerCertificate=yes"  (COMENTAR EL LOCAL)
+
+		2. en el archivo \config\database.php
+
+			Descomentar el la seccion sqlsrv las siguientes líneas (COMENTAR EN LOCAL)
+
+			'encrypt' => env('DB_ENCRYPT', 'yes'),
+			'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'true'),
+
+
+	- Para la inserción de registros que requieren generar consecutivos internos, estos consecutivos se generan en el Servidor y posteriormente se generan en las tablas
+	  los registros con los datos recibidos por el API y el consecutivo generado.
+
