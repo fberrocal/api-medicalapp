@@ -1,0 +1,8 @@
+node_modules/
+nginx/
+.gitignore
+dockerfile
+docker-compose.yml
+README
+#.env
+/vendor
